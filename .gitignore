@@ -61,3 +61,6 @@ crashlytics-build.properties
 # Mac OS
 .DS_Store
 
+# Rider
+/.idea
+
