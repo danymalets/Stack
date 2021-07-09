@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -33,25 +34,14 @@ public class CameraScale : MonoBehaviour
 
     private void OnGameInit()
     {
-        StartCoroutine(Scale(_camera.orthographicSize, _defaultSize));
+        _camera.DOOrthoSize(_defaultSize, _scalingTime);
     }
     
     private void OnGameOver()
     {
         float screenLowerY = _camera.WorldToScreenPoint(_lowerTargetPoint.position).y;
         float scale = (_camera.pixelHeight / 2f - screenLowerY) / (_camera.pixelHeight / 2f);
-        StartCoroutine(Scale(_defaultSize, _defaultSize * Mathf.Max(1f, scale)));
-    }
-
-    private IEnumerator Scale(float source, float target)
-    {
-        for (float elapsedTime = 0f; elapsedTime < _scalingTime; elapsedTime += Time.deltaTime)
-        {
-            _camera.orthographicSize = Mathf.Lerp(source, target, elapsedTime / _scalingTime);
-            yield return null;
-        }
-
-        _camera.orthographicSize = target;
-        yield return null;
+        float targetSize = _defaultSize * Mathf.Max(1f, scale);
+        _camera.DOOrthoSize(targetSize, _scalingTime);
     }
 }

@@ -31,7 +31,6 @@ public class TileSpawner : MonoBehaviour
     public void StartGame()
     {
         _colorGenerator = new ColorGenerator();
-        _tower.Destroy();
         
         _nextTilePosition = new Vector3(0f,_tileHeight / 2, 0f);
         _nextTileScale = new Vector3(1f, _tileHeight, 1f);

@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using DG.Tweening;
+
 
 [RequireComponent(typeof(Camera))]
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private GameState _gameState;
     [SerializeField] private Tower _tower;
-    [SerializeField] private float _liftingSpeed = 0.5f;
+    
+    [SerializeField] private float _liftingTime = 0.4f;
     [SerializeField] private float _returnTime = 0.5f;
     
     private Transform _transform;
@@ -34,27 +37,11 @@ public class CameraFollow : MonoBehaviour
 
     private void OnGameInit()
     {
-        StartCoroutine(Move(
-            _transform.position, 
-            _defaultPosition, 
-            _returnTime));
+        _transform.DOMove(_defaultPosition, _returnTime);
     }
     
     private void OnTileInstalled(Transform tile)
     {
-        StartCoroutine(Move(
-            _transform.position, 
-            _transform.position + Vector3.up * tile.localScale.y, 
-            tile.localScale.y / _liftingSpeed));
-    }
-
-    private IEnumerator Move(Vector3 source, Vector3 target, float time)
-    {
-        for (float elapsedTime = 0f; elapsedTime < time; elapsedTime += Time.deltaTime)
-        {
-            _transform.position = Vector3.Lerp(source, target, elapsedTime / time);
-            yield return null;
-        }
-        _transform.position = target;
+        _transform.DOMove(_transform.position + Vector3.up * tile.localScale.y, _liftingTime);
     }
 }
