@@ -9,7 +9,7 @@ public class ScoreCounter : MonoBehaviour
 {
     [SerializeField] private GameState _gameState;
     [SerializeField] private Tower _tower;
-    [FormerlySerializedAs("_tileCutting")] [SerializeField] private TileCutter _tileCutter;
+    [SerializeField] private TileCutter _tileCutter;
 
     [SerializeField] private TextMeshProUGUI _score;
     [SerializeField] private TextMeshProUGUI _bestScore;

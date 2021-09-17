@@ -7,13 +7,13 @@ using UnityEngine.Serialization;
 public class TileCutter : MonoBehaviour
 {
     [SerializeField] private Tower _tower;
-    [SerializeField] private float _allowableError = 0.05f;
+    [SerializeField] private float _allowableMistake = 0.04f;
     
     public event Action GameOver;
     
     public void Cut(Transform tile, Vector3 center)
     {
-        if (Vector3.Distance(tile.position, center) < _allowableError)
+        if (Vector3.Distance(tile.position, center) < _allowableMistake)
         {
             tile.position = center;
             _tower.Append(tile);

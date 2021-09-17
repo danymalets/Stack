@@ -7,8 +7,6 @@ using Random = UnityEngine.Random;
 
 public class Tower : MonoBehaviour
 {
-    [SerializeField] private float _scatterForce = 5.0f;
-    
     private List<Transform> _tiles = new List<Transform>();
     public int Score { get; private set; }
     public event Action<Transform> TileInstalled;

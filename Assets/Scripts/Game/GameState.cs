@@ -30,7 +30,7 @@ public class GameState : MonoBehaviour
     
     private void Start()
     {
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 60;
         StartCoroutine(WaitForStart());
     }
 
